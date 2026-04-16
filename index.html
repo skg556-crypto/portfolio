@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김용민 PD — 성형외과 콘텐츠 프로듀서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Bebas+Neue&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --surface: #111111;
+    --surface2: #181818;
+    --border: rgba(255,255,255,0.07);
+    --accent: #E8FF2A;
+    --accent2: #FF4D6D;
+    --text: #F0EEE8;
+    --muted: #666;
+    --muted2: #444;
+    --radius: 4px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(8,8,8,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+  }
+  .nav-links {
+    display: flex; gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-family: 'DM Mono', monospace;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 48px 80px 80px;
+    position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 16px;
+  }
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 8vw, 120px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .hero-name .name-part { display: inline; }
+  .hero-name .accent { color: var(--accent); }
+
+  .hero-pd-tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 3vw, 42px);
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .hero-desc {
+    margin-top: 32px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(240,238,232,0.7);
+    max-width: 440px;
+    border-left: 2px solid var(--accent);
+    padding-left: 20px;
+  }
+  .hero-desc strong { color: var(--text); font-weight: 500; }
+
+  .hero-cta {
+    display: flex; gap: 16px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px;
+    background: var(--accent);
+    color: #000;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'DM Mono', monospace;
+  }
+  .btn-primary:hover { background: #fff; transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: 'DM Mono', monospace;
+  }
+  .btn-outline:hover { border-color: var(--text); color: var(--text); }
+
+  /* ── STATS ── */
+  .hero-stats {
+    display: flex; gap: 0;
+    margin-top: 60px;
+    border-top: 1px solid var(--border);
+    padding-top: 36px;
+  }
+  .stat {
+    flex: 1;
+    padding-right: 32px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; padding-right: 0; padding-left: 32px; }
+  .stat:not(:first-child):not(:last-child) { padding-left: 32px; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── HERO RIGHT ── */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30vw;
+    color: rgba(255,255,255,0.015);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    letter-spacing: -0.05em;
+  }
+  .hero-visual-grid {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+    padding: 90px 48px 40px 20px;
+  }
+  .visual-cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+  }
+  .visual-cell img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+    filter: grayscale(30%);
+  }
+  .visual-cell:hover img { opacity: 0.8; }
+  .visual-cell-label {
+    position: absolute; bottom: 8px; left: 8px;
+    font-size: 9px;
+    font-family: 'DM Mono', monospace;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: var(--accent);
+    color: #000;
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker-item {
+    display: inline-flex; align-items: center; gap: 24px;
+    padding: 0 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .ticker-item::after {
+    content: '●';
+    font-size: 6px;
+    opacity: 0.6;
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 120px 80px;
+  }
+  .section-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 64px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+  }
+  .section-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+  }
+
+  /* ── WHY CARDS ── */
+  #why { background: var(--surface); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .why-card {
+    background: var(--bg);
+    padding: 48px 40px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .why-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .why-card:hover::before { transform: scaleX(1); }
+  .why-card:hover { border-color: rgba(232,255,42,0.2); }
+  .why-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .why-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(232,255,42,0.1);
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 20px;
+    border: 1px solid rgba(232,255,42,0.2);
+  }
+  .why-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .why-body {
+    font-size: 13.5px;
+    color: rgba(240,238,232,0.6);
+    line-height: 1.8;
+  }
+
+  /* ── WORKS (PORTFOLIO GALLERY) ── */
+  #works { background: var(--bg); }
+
+  .filter-bar {
+    display: flex; gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .filter-btn {
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+  }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 3px;
+  }
+  .work-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .work-card:hover { border-color: rgba(232,255,42,0.3); }
+  .work-thumb {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    background: var(--surface2);
+    overflow: hidden;
+  }
+  .work-thumb.vertical { padding-bottom: 177.78%; } /* 9:16 */
+  .work-thumb img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.3s;
+    filter: grayscale(20%);
+  }
+  .work-card:hover .work-thumb img {
+    transform: scale(1.04);
+    filter: grayscale(0%);
+  }
+  .work-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .work-card:hover .work-overlay { opacity: 1; }
+  .work-play {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px;
+    background: rgba(232,255,42,0.9);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .work-play svg { width: 18px; height: 18px; fill: #000; margin-left: 3px; }
+  .work-card:hover .work-play { opacity: 1; }
+  .work-info {
+    padding: 20px 20px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .work-cat {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .work-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+  .work-client {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+  .work-format-badge {
+    position: absolute; top: 12px; right: 12px;
+    padding: 3px 8px;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid var(--border);
+    font-size: 9px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    z-index: 2;
+  }
+  /* no-thumb placeholder */
+  .thumb-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 8px;
+  }
+  .thumb-placeholder svg { opacity: 0.15; }
+  .thumb-placeholder span {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted2);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── SHORTS PHILOSOPHY ── */
+  #shortform { background: var(--surface); }
+  .sf-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .sf-phone-wrap {
+    position: sticky; top: 120px;
+    display: flex; justify-content: center;
+  }
+  .sf-phone {
+    width: 240px;
+    aspect-ratio: 9/16;
+    border: 2px solid var(--border);
+    border-radius: 28px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(232,255,42,0.06);
+  }
+  .sf-phone-screen {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, #111 0%, #000 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px;
+    padding: 24px;
+  }
+  .sf-phone-label {
+    font-size: 9px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+  }
+  .sf-phone-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .sf-phone::before {
+    content: '';
+    position: absolute; top: 10px; left: 50%;
+    transform: translateX(-50%);
+    width: 60px; height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    z-index: 2;
+  }
+  .sf-points { display: flex; flex-direction: column; gap: 32px; }
+  .sf-point {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sf-point:last-child { border-bottom: none; }
+  .sf-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: rgba(232,255,42,0.15);
+    line-height: 1;
+  }
+  .sf-point-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .sf-point-body {
+    font-size: 13.5px;
+    color: rgba(240,238,232,0.6);
+    line-height: 1.8;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg); }
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .skill-bars { display: flex; flex-direction: column; gap: 28px; }
+  .skill-bar-item {}
+  .skill-bar-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px;
+  }
+  .skill-name { font-size: 13px; font-weight: 500; }
+  .skill-pct {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .skill-track {
+    height: 2px;
+    background: var(--surface2);
+    position: relative;
+  }
+  .skill-fill {
+    position: absolute; top: 0; left: 0; bottom: 0;
+    background: var(--accent);
+    width: 0%;
+    transition: width 1.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .spec-list { list-style: none; }
+  .spec-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 16px;
+    font-size: 14px;
+    color: rgba(240,238,232,0.7);
+  }
+  .spec-item::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ── CAREER ── */
+  #career { background: var(--surface); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; top: 0; bottom: 0; left: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .career-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    padding: 48px 0 48px 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .career-item::before {
+    content: '';
+    position: absolute; left: -4px; top: 55px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .career-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    padding-top: 4px;
+  }
+  .career-content {}
+  .career-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(232,255,42,0.08);
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 12px;
+    border: 1px solid rgba(232,255,42,0.15);
+  }
+  .career-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+  .career-desc {
+    font-size: 13.5px;
+    color: rgba(240,238,232,0.55);
+    line-height: 1.8;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--bg);
+    text-align: center;
+    padding: 160px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  #contact::before {
+    content: 'CONTACT';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30vw;
+    color: rgba(255,255,255,0.015);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .contact-inner { position: relative; z-index: 2; }
+  .contact-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .contact-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 100px);
+    line-height: 0.9;
+    margin-bottom: 56px;
+  }
+  .contact-grid {
+    display: flex; justify-content: center; gap: 64px;
+    flex-wrap: wrap;
+  }
+  .contact-item { text-align: center; }
+  .contact-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .contact-value {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-value:hover { color: var(--accent); }
+  .contact-insta {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    color: var(--muted);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 24px 80px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    letter-spacing: 0.1em;
+  }
+  .footer-tools {
+    display: flex; gap: 12px;
+  }
+  .tool-chip {
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted2);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1100px) {
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { display: none; }
+    .hero-left { padding: 100px 40px 60px; }
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .sf-layout { grid-template-columns: 1fr; }
+    .sf-phone-wrap { display: none; }
+    .skills-layout { grid-template-columns: 1fr; }
+    .career-item { grid-template-columns: 1fr; gap: 12px; padding-left: 28px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .contact-grid { gap: 40px; }
+  }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 9000;
+    align-items: center; justify-content: center;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner {
+    position: relative;
+    width: 90vw; max-width: 900px;
+    aspect-ratio: 16/9;
+  }
+  .lightbox-inner.vertical { aspect-ratio: 9/16; max-width: 400px; }
+  .lightbox-inner iframe {
+    width: 100%; height: 100%;
+    border: none;
+  }
+  .lightbox-close {
+    position: absolute; top: -48px; right: 0;
+    background: transparent; border: none;
+    color: var(--text); font-size: 28px;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    opacity: 0.7; transition: opacity 0.2s;
+  }
+  .lightbox-close:hover { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">KYM STUDIO</div>
+  <ul class="nav-links">
+    <li><a href="#why">소개</a></li>
+    <li><a href="#works">작업물</a></li>
+    <li><a href="#shortform">숏폼 전략</a></li>
+    <li><a href="#skills">스킬</a></li>
+    <li><a href="#career">커리어</a></li>
+    <li><a href="#contact">연락</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Producer Position</div>
+    <div class="hero-eyebrow">Medical Content Specialist</div>
+    <h1 class="hero-name">
+      <span class="name-part">김용민</span><span class="accent"> PD</span>
+    </h1>
+    <div class="hero-pd-tag">성형외과 전문 콘텐츠 프로듀서</div>
+    <p class="hero-desc">
+      병원 채널 <strong>기획·촬영·편집 풀스택</strong> 역량과<br>
+      유튜브 쇼츠·인스타 릴스 <strong>숏폼 전략</strong>까지.<br>
+      콘텐츠 하나로 신환을 만드는 PD입니다.
+    </p>
+    <div class="hero-cta">
+      <a href="#works" class="btn-primary">▶ 포트폴리오 보기</a>
+      <a href="#contact" class="btn-outline">연락하기</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">협력 병원 수</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5년+</div>
+        <div class="stat-label">성형외과 채널 운영</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2021</div>
+        <div class="stat-label">경기도광고홍보제 우수상</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-text">PD</div>
+    <div class="hero-visual-grid">
+      <div class="visual-cell">
+        <img src="https://img.youtube.com/vi/0uxYs6t1t9c/hqdefault.jpg" alt="">
+        <div class="visual-cell-label">나의닥터</div>
+      </div>
+      <div class="visual-cell">
+        <img src="https://img.youtube.com/vi/p4AwDcsdL2g/hqdefault.jpg" alt="">
+        <div class="visual-cell-label">JT성형외과</div>
+      </div>
+      <div class="visual-cell">
+        <img src="https://img.youtube.com/vi/OLyhXhXyOik/hqdefault.jpg" alt="">
+        <div class="visual-cell-label">비앤영</div>
+      </div>
+      <div class="visual-cell">
+        <img src="https://img.youtube.com/vi/32d24dWW1WI/hqdefault.jpg" alt="">
+        <div class="visual-cell-label">뮬리</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner" id="tickerInner"></div>
+</div>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Why Choose Me</div>
+      <h2 class="section-title">성형외과<br>채널이라면</h2>
+    </div>
+    <span class="section-count">03 REASONS</span>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-num">01</div>
+      <div class="why-tag">병원 채널 기획 및 제작</div>
+      <div class="why-title">의료 콘텐츠 제작 전문성</div>
+      <p class="why-body">나의닥터를 포함해 갤럭시·아이팅·에픽·브이엔·제이티·로사·앤드 성형외과 등 다양한 병원 채널을 직접 기획·운영. 의사 인터뷰부터 시술 정보까지 의료법 내 표현 방식을 이해합니다.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-num">02</div>
+      <div class="why-tag">풀스택 프로덕션</div>
+      <div class="why-title">기획·촬영·편집 원스톱</div>
+      <p class="why-body">콘텐츠 기획 → 현장 촬영 → 편집 → 업로드까지 PD로 전 과정 담당 경력으로 빠르고 일관된 병원 콘텐츠를 제작합니다.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-num">03</div>
+      <div class="why-tag">숏폼 · TV CF</div>
+      <div class="why-title">숏폼 + TV CF 광고 감각</div>
+      <p class="why-body">유튜브 쇼츠·인스타 릴스 숏폼 전략과 TV CF 조연출 경험. 알고리즘 이해부터 브랜드 톤앤매너까지 두루 갖춘 광고 감각으로 병원 홍보 영상 품질을 높입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Portfolio</div>
+      <h2 class="section-title">작업물</h2>
+    </div>
+    <span class="section-count" id="worksCount"></span>
+  </div>
+  <p class="reveal" style="margin-bottom:40px; font-size:13px; color:var(--muted); font-family:'DM Mono',monospace; letter-spacing:0.05em; line-height:1.7;">
+    성형외과 유튜브, 쇼츠, 릴스, TV CF 등 실제 제작·편집한 작업물입니다.<br>
+    썸네일 클릭 시 영상을 바로 확인하실 수 있습니다.
+  </p>
+  <div class="filter-bar reveal" id="filterBar"></div>
+  <div class="works-grid reveal" id="worksGrid"></div>
+</section>
+
+<!-- SHORTFORM PHILOSOPHY -->
+<section id="shortform">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Shortform Strategy</div>
+      <h2 class="section-title">쇼츠 &amp;<br>릴스 전략</h2>
+    </div>
+    <span class="section-count">04 POINTS</span>
+  </div>
+  <div class="sf-layout">
+    <div class="sf-phone-wrap reveal">
+      <div class="sf-phone">
+        <div class="sf-phone-screen">
+          <div class="sf-phone-label">나의닥터 · Shorts</div>
+          <div class="sf-phone-title">눈밑 지방재배치<br>꼭 알아야 할 것 3가지</div>
+          <img src="https://img.youtube.com/vi/0uxYs6t1t9c/mqdefault.jpg" style="width:100%;height:auto;opacity:0.6;margin-top:10px;" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="sf-points reveal">
+      <div class="sf-point">
+        <div class="sf-num">01</div>
+        <div>
+          <div class="sf-point-title">훅(Hook) 설계 — 0.5초 승부</div>
+          <p class="sf-point-body">임팩트 있는 오프닝 컷과 클릭 유도 훅 문구를 기획 단계부터 설계. 병원 쇼츠는 첫 프레임이 전부입니다.</p>
+        </div>
+      </div>
+      <div class="sf-point">
+        <div class="sf-num">02</div>
+        <div>
+          <div class="sf-point-title">자막·그래픽 중심 편집</div>
+          <p class="sf-point-body">무음 시청 환경을 고려한 임팩트 자막, 핵심 정보 그래픽 삽입, 빠른 컷 편집으로 체류 시간을 극대화합니다.</p>
+        </div>
+      </div>
+      <div class="sf-point">
+        <div class="sf-num">03</div>
+        <div>
+          <div class="sf-point-title">쇼츠·릴스 크로스 최적화</div>
+          <p class="sf-point-body">9:16 세로 포맷 촬영 구도, 플랫폼별 안전 영역 고려, 각각의 알고리즘 특성에 맞춘 편집 전략.</p>
+        </div>
+      </div>
+      <div class="sf-point">
+        <div class="sf-num">04</div>
+        <div>
+          <div class="sf-point-title">AI 적극 활용</div>
+          <p class="sf-point-body">AI 활용을 통한 쇼츠 및 릴스 제작. 사진 + 음성 조합으로 영상 제작, 케이스 리뷰 등 효율적인 콘텐츠 생산.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Skills & Spec</div>
+      <h2 class="section-title">스킬</h2>
+    </div>
+  </div>
+  <div class="skills-layout">
+    <div class="skill-bars reveal" id="skillBars"></div>
+    <div class="reveal">
+      <div class="section-label" style="margin-bottom:20px;">역량 범위</div>
+      <ul class="spec-list" id="specList"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER -->
+<section id="career">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Career</div>
+      <h2 class="section-title">커리어</h2>
+    </div>
+  </div>
+  <div class="timeline reveal" id="timeline"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-eyebrow reveal">Get In Touch</div>
+    <h2 class="contact-headline reveal">봐주셔서<br><span style="color:var(--accent)">감사합니다.</span></h2>
+    <div class="contact-grid reveal">
+      <div class="contact-item">
+        <div class="contact-type">Phone</div>
+        <a href="tel:01028627840" class="contact-value">010.2862.7840</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-type">Email</div>
+        <a href="mailto:kid556@naver.com" class="contact-value">kid556@naver.com</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-type">Instagram</div>
+        <a href="https://instagram.com/drag_on_m1n" target="_blank" class="contact-value">@drag_on_m1n</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 김용민 PD — All Rights Reserved</div>
+  <div class="footer-tools">
+    <div class="tool-chip">Premiere Pro</div>
+    <div class="tool-chip">After Effects</div>
+    <div class="tool-chip">Photoshop</div>
+    <div class="tool-chip">Illustrator</div>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner" id="lightboxInner">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <iframe id="lightboxFrame" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const data = {
+  ticker: [
+    "2021 경기도광고홍보제 우수상",
+    "성형외과 유튜브 · 쇼츠 · 릴스 전문",
+    "Premiere Pro · After Effects · Photoshop",
+    "나의닥터 · 아이팅 · 제이티 · 에픽 · 브이엔 성형외과 등 여러 병원 영상 제작",
+    "기획 · 촬영 · 편집 원스톱"
+  ],
+  works: [
+    { cat:"성형외과 유튜브", title:"정보성 성형 콘텐츠 영상", client:"나의닥터 (PR 성형외과)", url:"https://youtu.be/0uxYs6t1t9c", ytId:"0uxYs6t1t9c", format:"16:9" },
+    { cat:"성형외과 유튜브", title:"연예인 얼굴 분석", client:"JT 성형외과", url:"https://youtu.be/p4AwDcsdL2g", ytId:"p4AwDcsdL2g", format:"16:9" },
+    { cat:"성형외과 유튜브", title:"리얼모델 수술 브이로그 및 인터뷰", client:"비앤영 성형외과", url:"https://youtu.be/OLyhXhXyOik", ytId:"OLyhXhXyOik", format:"16:9" },
+    { cat:"성형외과 유튜브", title:"성형 케이스 리뷰 콘텐츠", client:"뮬리 성형외과", url:"https://youtu.be/32d24dWW1WI", ytId:"32d24dWW1WI", format:"16:9" },
+    { cat:"성형외과 유튜브", title:"드라마 리뷰 콘텐츠", client:"그랜드 성형외과", url:"https://youtu.be/hgCgy2X37pw", ytId:"hgCgy2X37pw", format:"16:9" },
+    { cat:"성형외과 유튜브", title:"필러 제품 홍보 영상", client:"청담서클의원", url:"https://youtu.be/GMmIW0IiEJw", ytId:"GMmIW0IiEJw", format:"16:9" },
+    { cat:"유튜브 쇼츠", title:"성형 이슈 관련 쇼츠 제작", client:"오프닝 성형외과", url:"https://youtube.com/shorts/E5DcYEAHZBs", ytId:"E5DcYEAHZBs", format:"9:16" },
+    { cat:"유튜브 쇼츠", title:"성형 관련 정보성 쇼츠", client:"에픽 성형외과", url:"https://youtube.com/shorts/4FZlrv9DwIs", ytId:"4FZlrv9DwIs", format:"9:16" },
+    { cat:"유튜브 쇼츠", title:"연예인 얼굴 분석 쇼츠", client:"에픽 성형외과", url:"https://youtube.com/shorts/_Yghyt18mEQ", ytId:"_Yghyt18mEQ", format:"9:16" },
+    { cat:"유튜브 쇼츠", title:"리얼 모델 성형 전후 쇼츠", client:"아이팅 성형외과", url:"https://youtube.com/shorts/_-0EsYJ61JA", ytId:"_-0EsYJ61JA", format:"9:16" },
+    { cat:"유튜브 쇼츠", title:"대화형 인터뷰 쇼츠", client:"로사클리닉", url:"https://youtube.com/shorts/QKyOE0tFzis", ytId:"QKyOE0tFzis", format:"9:16" },
+    { cat:"인스타그램 릴스", title:"아이돌 얼굴 분석 릴스", client:"VN 성형외과", url:"https://www.instagram.com/reel/DVPrsMvEQnX/", igThumb:"https://img.youtube.com/vi/p4AwDcsdL2g/mqdefault.jpg", format:"9:16" },
+    { cat:"인스타그램 릴스", title:"성형 관련 썰 형식 릴스", client:"VN 성형외과", url:"https://www.instagram.com/reel/DTzuZs0kaaW/", igThumb:"https://img.youtube.com/vi/_Yghyt18mEQ/mqdefault.jpg", format:"9:16" },
+    { cat:"인스타그램 릴스", title:"AI 활용 케이스 리뷰 릴스", client:"리뉴성형외과", url:"https://www.instagram.com/reel/DV7m6efvv4s/", igThumb:"https://img.youtube.com/vi/32d24dWW1WI/mqdefault.jpg", format:"9:16" },
+    { cat:"TV CF", title:"좋은데이 CF (조연출)", client:"좋은데이", url:"https://youtu.be/ezulLgME9t8", ytId:"ezulLgME9t8", format:"16:9" },
+    { cat:"TV CF", title:"보일러 광고 CF (조연출)", client:"대성 쎌틱", url:"https://youtu.be/6iYPue8CukI", ytId:"6iYPue8CukI", format:"16:9" },
+    { cat:"사내방송", title:"한국동서발전 사내방송 담당PD", client:"한국동서발전", url:"https://youtu.be/4w3SGoh1BXA", ytId:"4w3SGoh1BXA", format:"16:9" },
+    { cat:"공모전", title:"경기도광고홍보제 최우수 영상", client:"경기도청", url:"https://youtu.be/LvyfL2lZt1Y", ytId:"LvyfL2lZt1Y", format:"16:9" },
+  ],
+  skills: [
+    { name:"Premiere Pro", pct:95 },
+    { name:"After Effects", pct:85 },
+    { name:"Photoshop", pct:80 },
+    { name:"Illustrator", pct:65 },
+  ],
+  spec: [
+    "성형외과 유튜브 채널 기획 및 콘텐츠 전략",
+    "유튜브 쇼츠 / 인스타그램 릴스 숏폼 편집",
+    "의사 인터뷰 · 시술 정보 영상 제작",
+    "스튜디오 조명 · 현장 촬영 세팅",
+    "클라이언트 소통 · 콘텐츠 일정 관리"
+  ],
+  career: [
+    { year:"2022 — 2026", title:"이움크리에이티브 — 나의닥터 채널 운영 및 성형외과 채널 담당", desc:"나의닥터 채널 운영을 중심으로 갤럭시, 게이트, 리오, 함박눈, 제이티, 로사, 앤드 성형외과 등 다수 병원 유튜브 채널 콘텐츠 기획·촬영·편집 전담. 쇼츠·릴스 숏폼 콘텐츠 도입.", tag:"성형외과 전문" },
+    { year:"2021 — 2022", title:"사내방송 계약직 — 한국동서발전 + 성형외과 프리랜서", desc:"한국전력발전공사 산하 한국동서발전 사내방송 담당 PM 총괄. 성형외과 프리랜서 병행.", tag:"PM 역량" },
+    { year:"2020 — 2021", title:"방송국제교육원 — 제작과정 수료", desc:"방송 제작 전반 기초·실습 과정 이수. 2021 경기도광고홍보제 우수상 수상.", tag:"우수상 수상" },
+    { year:"2018 — 2019", title:"TV CF 조연출 인턴 — 크렌베리 주스 · 참좋은데이 · 대성쎌틱", desc:"TV CF 현장 조연출. 촬영 보조, 기획 보조, 현장 관리 담당.", tag:"TV CF 현장" },
+    { year:"2017 — 2018", title:"엘로우오투오 — 마케팅 대행 근무", desc:"인스타그램 피드 기획·제작, IPTV 타겟 광고, 사내영상 제작.", tag:"SNS 마케팅" },
+  ]
+};
+
+// ── TICKER ──
+const tickerEl = document.getElementById('tickerInner');
+const tickerHTML = data.ticker.map(t => `<span class="ticker-item">${t}</span>`).join('');
+tickerEl.innerHTML = tickerHTML + tickerHTML; // duplicate for seamless loop
+
+// ── WORKS GRID ──
+const cats = ['전체', ...new Set(data.works.map(w => w.cat))];
+const filterBar = document.getElementById('filterBar');
+let activeCat = '전체';
+
+cats.forEach(cat => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn' + (cat === '전체' ? ' active' : '');
+  btn.textContent = cat;
+  btn.addEventListener('click', () => {
+    activeCat = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderWorks();
+  });
+  filterBar.appendChild(btn);
+});
+
+function getYtEmbed(ytId) {
+  return `https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0`;
+}
+
+function renderWorks() {
+  const grid = document.getElementById('worksGrid');
+  const filtered = activeCat === '전체' ? data.works : data.works.filter(w => w.cat === activeCat);
+  document.getElementById('worksCount').textContent = filtered.length + ' WORKS';
+  grid.innerHTML = '';
+  filtered.forEach(work => {
+    const isVertical = work.format === '9:16';
+    const thumbUrl = work.ytId
+      ? `https://img.youtube.com/vi/${work.ytId}/hqdefault.jpg`
+      : work.igThumb || null;
+
+    const card = document.createElement('a');
+    card.className = 'work-card';
+    card.href = work.url;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+
+    // If YouTube, open in lightbox instead
+    if (work.ytId) {
+      card.href = '#';
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        openLightbox(getYtEmbed(work.ytId), isVertical);
+      });
+    }
+
+    card.innerHTML = `
+      <div class="work-thumb${isVertical ? ' vertical' : ''}">
+        ${thumbUrl
+          ? `<img src="${thumbUrl}" alt="${work.title}" loading="lazy">`
+          : `<div class="thumb-placeholder">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="2" stroke="white" stroke-width="1.5"/><path d="M16 13L28 20L16 27V13Z" fill="white"/></svg>
+              <span>${work.cat}</span>
+            </div>`
+        }
+        <div class="work-play">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="work-overlay"></div>
+        <div class="work-format-badge">${work.format}</div>
+      </div>
+      <div class="work-info">
+        <div class="work-cat">${work.cat}</div>
+        <div class="work-title">${work.title}</div>
+        <div class="work-client">${work.client}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  document.getElementById('worksCount').textContent = filtered.length + ' WORKS';
+}
+renderWorks();
+
+// ── SKILLS ──
+const skillBars = document.getElementById('skillBars');
+data.skills.forEach(s => {
+  skillBars.innerHTML += `
+    <div class="skill-bar-item">
+      <div class="skill-bar-header">
+        <div class="skill-name">${s.name}</div>
+        <div class="skill-pct">${s.pct}%</div>
+      </div>
+      <div class="skill-track">
+        <div class="skill-fill" data-pct="${s.pct}"></div>
+      </div>
+    </div>
+  `;
+});
+
+const specList = document.getElementById('specList');
+data.spec.forEach(s => {
+  specList.innerHTML += `<li class="spec-item">${s}</li>`;
+});
+
+// ── CAREER ──
+const timeline = document.getElementById('timeline');
+data.career.forEach(c => {
+  timeline.innerHTML += `
+    <div class="career-item">
+      <div class="career-year">${c.year}</div>
+      <div class="career-content">
+        <div class="career-tag">${c.tag}</div>
+        <div class="career-title">${c.title}</div>
+        <p class="career-desc">${c.desc}</p>
+      </div>
+    </div>
+  `;
+});
+
+// ── LIGHTBOX ──
+const lightbox = document.getElementById('lightbox');
+const lightboxFrame = document.getElementById('lightboxFrame');
+const lightboxInner = document.getElementById('lightboxInner');
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+function openLightbox(embedUrl, isVertical) {
+  lightboxFrame.src = embedUrl;
+  lightboxInner.className = 'lightbox-inner' + (isVertical ? ' vertical' : '');
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lightboxFrame.src = '';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Animate skill bars when in view
+      entry.target.querySelectorAll('.skill-fill').forEach(fill => {
+        fill.style.width = fill.dataset.pct + '%';
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Also observe skill section directly
+const skillsSection = document.getElementById('skills');
+if (skillsSection) {
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.skill-fill').forEach(fill => {
+          setTimeout(() => { fill.style.width = fill.dataset.pct + '%'; }, 200);
+        });
+        skillObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  skillObserver.observe(skillsSection);
+}
+</script>
+</body>
+</html>
